@@ -104,3 +104,41 @@ The following paid services were intentionally avoided in the initial version:
 - Add Azure Policy
 - Convert deployment to Terraform
 - Add monitoring with Log Analytics
+
+
+---
+
+# 2. Adiciona uma secção de Skills
+
+No final do README mete:
+
+```markdown
+## Skills Demonstrated
+
+### Azure
+
+- Azure Resource Groups
+- Azure Virtual Networks
+- Azure Subnets
+- Azure Network Security Groups
+- Azure RBAC
+
+### Cloud Security
+
+- Network Segmentation
+- Least Privilege Access Control
+- Inbound Traffic Restriction
+- Secure Landing Zone Design
+
+### Infrastructure as Code
+
+- Terraform
+- AzureRM Provider
+- Resource Dependencies
+- Network Security Automation
+
+### Version Control
+
+- Git
+- GitHub
+- Technical Documentation
