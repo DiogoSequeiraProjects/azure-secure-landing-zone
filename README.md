@@ -64,7 +64,7 @@ The Terraform code can be found in:
 
 ```text
 terraform/main.tf
-
+```
 ### Network Segmentation
 
 The virtual network was divided into multiple subnets to separate management, private and workload resources.
@@ -123,11 +123,7 @@ The following paid services were intentionally avoided in the initial version:
 
 ---
 
-# 2. Adiciona uma secção de Skills
 
-No final do README mete:
-
-```markdown
 ## Skills Demonstrated
 
 ### Azure
