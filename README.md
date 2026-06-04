@@ -30,6 +30,26 @@ The landing zone includes:
 
 ## Security Controls
 
+## Infrastructure as Code (Terraform)
+
+This project was also implemented using Terraform Infrastructure as Code (IaC).
+
+The Terraform configuration recreates the Azure environment including:
+
+- Resource Group
+- Virtual Network
+- Management Subnet
+- Private Subnet
+- Workload Subnet
+- Network Security Group (NSG)
+- Deny-Internet-Inbound Rule
+- NSG Association with Private Subnet
+
+The Terraform code can be found in:
+
+```text
+terraform/main.tf
+
 ### Network Segmentation
 
 The virtual network was divided into multiple subnets to separate management, private and workload resources.
