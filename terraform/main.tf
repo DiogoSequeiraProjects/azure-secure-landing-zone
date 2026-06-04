@@ -43,3 +43,28 @@ resource "azurerm_subnet" "workload" {
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = ["10.0.3.0/24"]
 }
+
+resource "azurerm_network_security_group" "private_nsg" {
+  name                = "nsg-private-subnet"
+  location            = azurerm_resource_group.landingzone.location
+  resource_group_name = azurerm_resource_group.landingzone.name
+}
+
+resource "azurerm_network_security_rule" "deny_internet_inbound" {
+  name                        = "Deny-Internet-Inbound"
+  priority                    = 200
+  direction                   = "Inbound"
+  access                      = "Deny"
+  protocol                    = "*"
+  source_port_range           = "*"
+  destination_port_range      = "*"
+  source_address_prefix       = "Internet"
+  destination_address_prefix  = "*"
+  resource_group_name         = azurerm_resource_group.landingzone.name
+  network_security_group_name = azurerm_network_security_group.private_nsg.name
+}
+
+resource "azurerm_subnet_network_security_group_association" "private_nsg_association" {
+  subnet_id                 = azurerm_subnet.private.id
+  network_security_group_id = azurerm_network_security_group.private_nsg.id
+}
