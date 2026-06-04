@@ -1,13 +1,27 @@
 # Azure Secure Landing Zone
 
+![Azure](https://img.shields.io/badge/Azure-Cloud-blue)
+![Terraform](https://img.shields.io/badge/Terraform-IaC-purple)
+![Security](https://img.shields.io/badge/Security-Cloud-green)
+![RBAC](https://img.shields.io/badge/RBAC-Least%20Privilege-orange)
+
 ## Overview
 
-This project demonstrates the design and implementation of a secure Azure landing zone using core Azure networking and identity security concepts.
+This project demonstrates the design and implementation of a secure Azure Landing Zone following Microsoft cloud security and networking best practices.
 
-The goal was to build a cost-conscious Azure environment focused on network segmentation, inbound traffic restriction, and least privilege access control.
+The environment was built with a security-first approach focusing on:
+
+- Network segmentation
+- Least privilege access control (RBAC)
+- Network Security Groups (NSGs)
+- Cost optimization
+- Infrastructure as Code (Terraform)
+
+The project was implemented using both the Azure Portal and Terraform.
 
 ## Architecture
-![Azure Landing Zone](diagrams/Azure-Secure.png)
+![Azure Landing Zone](diagrams/ChatGPTImage4_06_2026,00_22_16.png)
+
 The landing zone includes:
 
 - Resource Group
