@@ -7,7 +7,7 @@ This project demonstrates the design and implementation of a secure Azure landin
 The goal was to build a cost-conscious Azure environment focused on network segmentation, inbound traffic restriction, and least privilege access control.
 
 ## Architecture
-
+![Azure Landing Zone](diagrams/Azure-Secure.png)
 The landing zone includes:
 
 - Resource Group
@@ -18,6 +18,7 @@ The landing zone includes:
 - Network Security Group
 - Inbound deny rule for Internet traffic
 - RBAC Reader role assignment
+
 
 ## Network Design
 
