@@ -20,7 +20,7 @@ The environment was built with a security-first approach focusing on:
 The project was implemented using both the Azure Portal and Terraform.
 
 ## Architecture
-![Azure Landing Zone](diagrams/ChatGPTImage4_06_2026,00_22_16.png)
+![Azure Landing Zone](diagrams/Azure-Secure.png)
 
 The landing zone includes:
 
