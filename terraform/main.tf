@@ -75,3 +75,9 @@ resource "azurerm_subnet_network_security_group_association" "private_nsg_associ
   network_security_group_id = azurerm_network_security_group.private_nsg.id
 }
 
+resource "azurerm_management_lock" "resource_group_lock" {
+  name       = "delete-protection"
+  scope      = azurerm_resource_group.landingzone.id
+  lock_level = "CanNotDelete"
+  notes      = "Protect Secure Landing Zone resources from accidental deletion."
+}
