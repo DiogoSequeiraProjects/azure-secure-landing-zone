@@ -29,7 +29,7 @@ The project was implemented using both the Azure Portal and Terraform.
 
 ## Architecture
 
-![Azure Landing Zone](diagrams/ImageGeneratedOfDiagram.png)
+![Azure Landing Zone](diagrams/ArchitetureDiagram.png)
 
 ### Components
 
