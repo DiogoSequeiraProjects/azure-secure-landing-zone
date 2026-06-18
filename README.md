@@ -78,7 +78,7 @@ The virtual network was divided into dedicated subnets to isolate management, pr
 
 This design follows the principle of reducing attack surface and limiting lateral movement.
 
----
+
 
 ## Security Controls
 
@@ -206,7 +206,14 @@ GitHub Actions were implemented to automatically validate Terraform code.
 The Checkov security scanner helps identify potential cloud security misconfigurations before deployment.
 
 ---
+## Terraform Module Roadmap
 
+The Terraform structure is being prepared to evolve into reusable modules:
+
+- `modules/networking` for VNet, subnets and NSGs
+- `modules/governance` for policies, locks and tags
+
+This improves maintainability and follows Infrastructure as Code best practices.
 ## Skills Demonstrated
 
 ### Azure
