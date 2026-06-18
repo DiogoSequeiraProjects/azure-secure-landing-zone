@@ -100,3 +100,11 @@ resource "azurerm_resource_group_policy_assignment" "allowed_locations" {
     }
   })
 }
+
+resource "azurerm_key_vault" "secure_kv" {
+  name                = "kv-secure-lz"
+  location            = azurerm_resource_group.landingzone.location
+  resource_group_name = azurerm_resource_group.landingzone.name
+  tenant_id           = data.azurerm_client_config.current.tenant_id
+  sku_name            = "standard"
+}
