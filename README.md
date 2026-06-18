@@ -86,6 +86,18 @@ Azure Role-Based Access Control was configured using the Reader role.
 
 This allows visibility over resources without granting permissions to create, modify or delete Azure resources.
 
+## DevSecOps Validation
+
+This project uses GitHub Actions to validate Terraform code automatically.
+
+Implemented checks:
+
+- Terraform init
+- Terraform format check
+- Terraform validate
+- Checkov security scan
+
+The Checkov scan is used to identify potential security misconfigurations in the Terraform code before deployment.
 ## Cost Control
 
 This project was designed to avoid unnecessary costs.
