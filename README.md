@@ -1,13 +1,11 @@
 # Azure Secure Landing Zone
 
-![Azure](https://img.shields.io/badge/Azure-Cloud-blue)
-![Terraform](https://img.shields.io/badge/Terraform-IaC-purple)
-![Security](https://img.shields.io/badge/Security-Cloud-green)
-![RBAC](https://img.shields.io/badge/RBAC-Least%20Privilege-orange)
-
-![Terraform](https://img.shields.io/badge/IaC-Terraform-blue)
 ![Azure](https://img.shields.io/badge/Cloud-Microsoft%20Azure-blue)
+![Terraform](https://img.shields.io/badge/IaC-Terraform-purple)
 ![Security](https://img.shields.io/badge/Security-Hardened-green)
+![RBAC](https://img.shields.io/badge/RBAC-Least%20Privilege-orange)
+![GitHub Actions](https://img.shields.io/badge/CI-GitHub%20Actions-black)
+![Checkov](https://img.shields.io/badge/Scan-Checkov-lightgrey)
 ## Overview
 
 This project demonstrates the design and implementation of a secure Azure Landing Zone following Microsoft cloud security and networking best practices.
