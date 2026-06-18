@@ -81,3 +81,22 @@ resource "azurerm_management_lock" "resource_group_lock" {
   lock_level = "CanNotDelete"
   notes      = "Protect Secure Landing Zone resources from accidental deletion."
 }
+
+data "azurerm_policy_definition" "allowed_locations" {
+  display_name = "Allowed locations"
+}
+
+resource "azurerm_resource_group_policy_assignment" "allowed_locations" {
+  name                 = "allowed-locations-west-europe"
+  resource_group_id    = azurerm_resource_group.landingzone.id
+  policy_definition_id = data.azurerm_policy_definition.allowed_locations.id
+  display_name         = "Allowed Locations - West Europe"
+
+  parameters = jsonencode({
+    listOfAllowedLocations = {
+      value = [
+        "westeurope"
+      ]
+    }
+  })
+}
