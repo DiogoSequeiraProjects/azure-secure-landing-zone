@@ -6,24 +6,32 @@
 ![RBAC](https://img.shields.io/badge/RBAC-Least%20Privilege-orange)
 ![GitHub Actions](https://img.shields.io/badge/CI-GitHub%20Actions-black)
 ![Checkov](https://img.shields.io/badge/Scan-Checkov-lightgrey)
-## Overview
 
-This project demonstrates the design and implementation of a secure Azure Landing Zone following Microsoft cloud security and networking best practices.
+---
 
-The environment was built with a security-first approach focusing on:
+## Project Overview
 
-- Network segmentation
-- Least privilege access control (RBAC)
+This project demonstrates the design and implementation of a secure Azure Landing Zone following Microsoft Azure security, governance, and networking best practices.
+
+The environment was built using a security-first approach focused on:
+
+- Network Segmentation
+- Least Privilege Access Control (RBAC)
 - Network Security Groups (NSGs)
-- Cost optimization
+- Azure Governance Controls
+- Cost Management
 - Infrastructure as Code (Terraform)
+- DevSecOps Validation
 
 The project was implemented using both the Azure Portal and Terraform.
 
+---
+
 ## Architecture
+
 ![Azure Landing Zone](diagrams/ImageGeneratedOfDiagram.png)
 
-The landing zone includes:
+### Components
 
 - Resource Group
 - Virtual Network
@@ -31,78 +39,119 @@ The landing zone includes:
 - Private Subnet
 - Workload Subnet
 - Network Security Group
-- Inbound deny rule for Internet traffic
-- RBAC Reader role assignment
+- Azure RBAC
+- Azure Policy
+- Resource Locks
+- Cost Management Budget
+- Terraform Infrastructure as Code
+- GitHub Actions Validation Pipeline
 
+---
+
+## Azure Resources
+
+| Resource Type | Name |
+|--------------|------|
+| Resource Group | `rg-secure-landing-zone` |
+| Virtual Network | `vnet-secure-lz` |
+| Management Subnet | `subnet-management` |
+| Private Subnet | `subnet-private` |
+| Workload Subnet | `subnet-workload` |
+| Network Security Group | `nsg-private-subnet` |
+| Resource Lock | `delete-protection` |
+| Azure Policy | `Allowed Locations` |
+
+---
 
 ## Network Design
 
-| Component | Name | Address Space |
-|---|---|---|
-| Virtual Network | `vnet-secure-lz` | `10.0.0.0/16` |
-| Management Subnet | `subnet-management` | `10.0.1.0/24` |
-| Private Subnet | `subnet-private` | `10.0.2.0/24` |
-| Workload Subnet | `subnet-workload` | `10.0.3.0/24` |
+| Component | Address Space |
+|------------|---------------|
+| Virtual Network | `10.0.0.0/16` |
+| Management Subnet | `10.0.1.0/24` |
+| Private Subnet | `10.0.2.0/24` |
+| Workload Subnet | `10.0.3.0/24` |
 
-## Security Controls
-
-## Infrastructure as Code (Terraform)
-
-This project was also implemented using Terraform Infrastructure as Code (IaC).
-
-The Terraform configuration recreates the Azure environment including:
-
-- Resource Group
-- Virtual Network
-- Management Subnet
-- Private Subnet
-- Workload Subnet
-- Network Security Group (NSG)
-- Deny-Internet-Inbound Rule
-- NSG Association with Private Subnet
-
-The Terraform code can be found in:
-
-```text
-terraform/main.tf
-```
 ### Network Segmentation
 
-The virtual network was divided into multiple subnets to separate management, private and workload resources.
+The virtual network was divided into dedicated subnets to isolate management, private, and workload resources.
+
+This design follows the principle of reducing attack surface and limiting lateral movement.
+
+---
+
+## Security Controls
 
 ### Network Security Group
 
 An NSG named `nsg-private-subnet` was associated with the private subnet.
 
-The following inbound rule was created:
+### Security Rule
 
 | Rule Name | Priority | Source | Destination | Action |
-|---|---:|---|---|---|
-| `Deny-Internet-Inbound` | `200` | Internet | Any | Deny |
+|------------|----------|----------|-------------|--------|
+| Deny-Internet-Inbound | 200 | Internet | Any | Deny |
 
-### RBAC Least Privilege
+This rule blocks inbound traffic originating from the Internet.
+
+---
+
+### RBAC (Least Privilege)
 
 Azure Role-Based Access Control was configured using the Reader role.
 
-This allows visibility over resources without granting permissions to create, modify or delete Azure resources.
+This implementation follows the Principle of Least Privilege by allowing visibility of resources without granting modification permissions.
 
-## DevSecOps Validation
+---
 
-This project uses GitHub Actions to validate Terraform code automatically.
+## Governance & Compliance
 
-Implemented checks:
+### Azure Policy
 
-- Terraform init
-- Terraform format check
-- Terraform validate
-- Checkov security scan
+An Azure Policy was assigned to restrict resource deployments to approved Azure regions.
 
-The Checkov scan is used to identify potential security misconfigurations in the Terraform code before deployment.
-## Cost Control
+Policy:
 
-This project was designed to avoid unnecessary costs.
+- Allowed Locations = West Europe
 
-The following paid services were intentionally avoided in the initial version:
+### Resource Lock
+
+A Delete Lock was applied to the Resource Group:
+
+```text
+delete-protection
+```
+
+This prevents accidental deletion of critical resources.
+
+### Resource Tags
+
+Standardized tags were applied across resources:
+
+| Tag | Value |
+|------|--------|
+| Environment | Lab |
+| Project | Azure-Secure-Landing-Zone |
+| Owner | Diogo-Sequeira |
+| CostCenter | Learning |
+
+---
+
+## Cost Management
+
+A monthly Azure Budget was configured to monitor spending and trigger alerts.
+
+Configured thresholds:
+
+- 50%
+- 80%
+- 100%
+
+Email notifications are automatically sent when thresholds are reached.
+
+### Cost Optimization Decisions
+
+The following paid services were intentionally excluded:
 
 - Azure Bastion
 - Azure Firewall
@@ -110,32 +159,53 @@ The following paid services were intentionally avoided in the initial version:
 - VPN Gateway
 - Application Gateway
 - Microsoft Sentinel
-- Defender for Cloud paid plans
+- Defender for Cloud (Paid Plans)
 
-## Skills Demonstrated
-
-- Azure Portal
-- Resource Groups
-- Virtual Networks
-- Subnet Design
-- Network Security Groups
-- RBAC
-- Least Privilege
-- Cloud Security Architecture
-- Cost-aware Azure design
-
-## Future Improvements
-
-- Deploy a private Ubuntu VM without a public IP
-- Add Azure Bastion Developer SKU if available
-- Add Azure Key Vault
-- Add Azure Policy
-- Convert deployment to Terraform
-- Add monitoring with Log Analytics
-
+This keeps the environment within Azure Free Tier limits.
 
 ---
 
+## Infrastructure as Code (Terraform)
+
+Terraform was used to reproduce the Azure environment as code.
+
+Implemented resources:
+
+- Resource Group
+- Virtual Network
+- Management Subnet
+- Private Subnet
+- Workload Subnet
+- Network Security Group
+- NSG Security Rules
+- NSG Associations
+- Resource Tags
+
+Terraform files:
+
+```text
+terraform/
+├── main.tf
+├── variables.tf
+├── outputs.tf
+```
+
+---
+
+## DevSecOps Validation
+
+GitHub Actions were implemented to automatically validate Terraform code.
+
+### Implemented Controls
+
+- Terraform Init
+- Terraform Format Check
+- Terraform Validate
+- Checkov Security Scan
+
+The Checkov security scanner helps identify potential cloud security misconfigurations before deployment.
+
+---
 
 ## Skills Demonstrated
 
@@ -146,23 +216,58 @@ The following paid services were intentionally avoided in the initial version:
 - Azure Subnets
 - Azure Network Security Groups
 - Azure RBAC
+- Azure Policy
+- Azure Resource Locks
+- Azure Cost Management
 
 ### Cloud Security
 
-- Network Segmentation
-- Least Privilege Access Control
-- Inbound Traffic Restriction
 - Secure Landing Zone Design
+- Network Segmentation
+- Least Privilege
+- Governance Controls
+- Cost-Aware Security Design
 
 ### Infrastructure as Code
 
 - Terraform
 - AzureRM Provider
 - Resource Dependencies
-- Network Security Automation
+- Infrastructure Automation
 
-### Version Control
+### DevSecOps
 
-- Git
-- GitHub
+- GitHub Actions
+- Terraform Validation
+- Security Scanning
+- Checkov
+
+### Documentation
+
 - Technical Documentation
+- Architecture Diagrams
+- Security Decision Records
+
+---
+
+## Future Improvements
+
+- Deploy a Private Ubuntu VM
+- Implement Azure Key Vault
+- Add Bastion Developer SKU
+- Add Log Analytics Workspace
+- Add NSG Flow Logs
+- Create Custom Azure Policies
+- Implement Terraform Modules
+- Add Terraform Remote State
+- Integrate Microsoft Defender for Cloud
+
+---
+
+## Author
+
+**Diogo Sequeira**
+
+Computer Engineering Student | Cloud Security Enthusiast
+
+Focused on Azure Security, Cloud Governance, Infrastructure Security and DevSecOps.
