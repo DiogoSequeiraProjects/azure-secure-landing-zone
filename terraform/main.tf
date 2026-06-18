@@ -68,3 +68,4 @@ resource "azurerm_subnet_network_security_group_association" "private_nsg_associ
   subnet_id                 = azurerm_subnet.private.id
   network_security_group_id = azurerm_network_security_group.private_nsg.id
 }
+# Test GitHub Actions
