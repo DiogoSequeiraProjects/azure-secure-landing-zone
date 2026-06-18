@@ -14,6 +14,8 @@ provider "azurerm" {
 resource "azurerm_resource_group" "landingzone" {
   name     = "rg-secure-landing-zone"
   location = "West Europe"
+
+  tags = var.common_tags
 }
 
 resource "azurerm_virtual_network" "vnet" {
@@ -21,6 +23,8 @@ resource "azurerm_virtual_network" "vnet" {
   location            = azurerm_resource_group.landingzone.location
   resource_group_name = azurerm_resource_group.landingzone.name
   address_space       = ["10.0.0.0/16"]
+
+  tags = var.common_tags
 }
 
 resource "azurerm_subnet" "management" {
@@ -48,6 +52,8 @@ resource "azurerm_network_security_group" "private_nsg" {
   name                = "nsg-private-subnet"
   location            = azurerm_resource_group.landingzone.location
   resource_group_name = azurerm_resource_group.landingzone.name
+
+  tags = var.common_tags
 }
 
 resource "azurerm_network_security_rule" "deny_internet_inbound" {
