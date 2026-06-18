@@ -15,3 +15,16 @@ variable "vnet_name" {
   type        = string
   default     = "vnet-secure-lz"
 }
+
+
+variable "common_tags" {
+  description = "Common tags applied to all supported resources."
+  type        = map(string)
+
+  default = {
+    Environment = "Lab"
+    Project     = "Azure-Secure-Landing-Zone"
+    Owner       = "Diogo-Sequeira"
+    CostCenter  = "Learning"
+  }
+}
