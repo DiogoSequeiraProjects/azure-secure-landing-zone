@@ -131,3 +131,19 @@ resource "azurerm_key_vault" "secure_kv" {
 
   tags = var.common_tags
 }
+
+resource "azurerm_private_endpoint" "key_vault_pe" {
+  name                = "pe-key-vault-secure-lz"
+  location            = azurerm_resource_group.landingzone.location
+  resource_group_name = azurerm_resource_group.landingzone.name
+  subnet_id           = azurerm_subnet.private.id
+
+  private_service_connection {
+    name                           = "psc-key-vault-secure-lz"
+    private_connection_resource_id = azurerm_key_vault.secure_kv.id
+    subresource_names              = ["vault"]
+    is_manual_connection           = false
+  }
+
+  tags = var.common_tags
+}
