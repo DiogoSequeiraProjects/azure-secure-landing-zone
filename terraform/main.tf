@@ -52,6 +52,11 @@ resource "azurerm_subnet" "workload" {
   address_prefixes     = ["10.0.3.0/24"]
 }
 
+resource "azurerm_subnet_network_security_group_association" "workload" {
+  subnet_id                 = azurerm_subnet.workload.id
+  network_security_group_id = azurerm_network_security_group.private_nsg.id
+}
+
 resource "azurerm_network_security_group" "private_nsg" {
   name                = "nsg-private-subnet"
   location            = azurerm_resource_group.landingzone.location
