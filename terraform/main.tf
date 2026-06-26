@@ -118,4 +118,16 @@ resource "azurerm_key_vault" "secure_kv" {
   resource_group_name = azurerm_resource_group.landingzone.name
   tenant_id           = data.azurerm_client_config.current.tenant_id
   sku_name            = "standard"
+
+  purge_protection_enabled   = true
+  soft_delete_retention_days = 90
+
+  public_network_access_enabled = false
+
+  network_acls {
+    default_action = "Deny"
+    bypass         = "AzureServices"
+  }
+
+  tags = var.common_tags
 }
